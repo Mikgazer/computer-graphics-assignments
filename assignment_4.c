@@ -5,10 +5,11 @@
 #include <math.h>
 #include <time.h>
 #include <windows.h>
-#define PI 3.14
+#define PI 3.1415926535
 #define nslices 100
 #define nstacks 100
 
+//initial angles
 GLfloat angleSun=0.0;
 GLfloat angleMercury=0.0;
 GLfloat angleVenus=0.0;
@@ -17,9 +18,11 @@ GLfloat angleMoon=0.0;
 GLfloat angleMars=0.0;
 GLfloat angleJupiter=0.0;
 GLfloat angleSaturn=0.0;
-GLfloat angleUranus=0.0;
-GLfloat angleNeptune=0.0;
+GLfloat angleUranus=60.0;
+GLfloat angleNeptune=60.0;
+//GLfloat anglePluto=60.0;
 
+//initial scaling factor
 GLfloat sx=0.2,sy=0.2,sz=0.2;
 GLfloat black[]={0.0f,0.0f,0.0f,1.0f};
 GLfloat white[]={1.0f,1.0f,1.0f,1.0f};
@@ -27,6 +30,7 @@ GLfloat blue[]={0.0f,0.0f,0.9f,1.0f};
 GLfloat er[]={0.0f,5.0f,0.9f,1.0f};
 GLfloat yellow[]={0.7f,0.2f,0.0f,1.0f};
 
+//material light properties
 GLfloat mercury_shininess[]={80};
 GLfloat venus_shininess[]={70};
 GLfloat earth_shininess[]={60};
@@ -36,17 +40,20 @@ GLfloat jupiter_shininess[]={30};
 GLfloat saturn_shininess[]={25};
 GLfloat uranus_shininess[]={20};
 GLfloat neptune_shininess[]={15};
+//GLfloat pluto_shininess[]={2};
 
+//Ambient, diffuse, and specular light properties
 GLfloat Ambient[]={0.1,0.1,0.1,1.0};
 GLfloat Diffuse[]={1.0,1.0,1.0,1.0};
 GLfloat Specular[]={.50,.50,.50,.10};
 
 GLfloat Position[]={0,0,0,0.1};
 //distance from the center * scale factor (sx,sy,sz)
-GLfloat scale_vector[8]={0.3 , 0.40, 0.50, 0.60, 0.74, 0.88, 1.00, 1.12};
+GLfloat scale_vector[]={0.3 , 0.40, 0.50, 0.60, 0.74, 0.88, 1.00, 1.12,1.3};
+//refresh time
 GLint mmseconds = 25;
-
-double ang=2*PI/360;
+//drawing factor
+GLdouble sum_angle=PI/360;
 
 // Routine to draw a stroke character string.
 void writeStrokeString(void *font, char *string)
@@ -55,49 +62,54 @@ void writeStrokeString(void *font, char *string)
    for (c = string; *c != '\0'; c++) glutStrokeCharacter(font, *c);
 }
 
-void init()
-{
-	glClearColor(0.01,0.01,0.01,0.0); //backgroundcolor is black
-	glPointSize(1.0);
-	glLineWidth(2.0);
-}
-
 void draw_orbit()
 {
 
 	glColor3f(1.0,1.0,1.0);
-	int i=0;
-	for(i=0;i<8;i++)
+	int index=0;
+	for(index=0;index<8;index++)
     {
 		glPushMatrix();
             glRotatef(63,1.0,0.0,0.0);
             //ingrandisco la dimensione dell'orbita
-            glScalef(scale_vector[i],scale_vector[i],scale_vector[i]);
+            glScalef(scale_vector[index],scale_vector[index],scale_vector[index]);
             //iniziuo a disegnare, punti
             glBegin(GL_POINTS);
-            double ang1=0.0;
+            double angle=0.0;
             int z = 0;
             for(z=0;z<1440;z++)
             {
                 //parametrizzazione di una circonferenza
-                glVertex2d(cos(ang1),sin(ang1));
-                ang1+=ang;
+                glVertex2d(cos(angle),sin(angle));
+                angle+=sum_angle;
             }
             glEnd();
 		glPopMatrix();
+
 	}
 }
 
-void Lighting()
+void initiate_lighting()
 {
 
 	glLightfv(GL_LIGHT0,GL_AMBIENT,Ambient);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,Diffuse);
     glLightfv(GL_LIGHT0,GL_SPECULAR,Specular);
+    //glLightModelf(GL_LIGHT_MODEL_AMBIENT,globalAmb);
+    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER,GL_TRUE);
 
+    glShadeModel((GL_SMOOTH));
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0); //GL_LIGHTi, i is 0
 
+}
+
+void init()
+{
+    initiate_lighting();
+	glClearColor(0.01,0.01,0.01,0.0); //backgroundcolor is black
+	glPointSize(1.0);
+	glLineWidth(2.0);
 }
 
 void display(void)
@@ -333,7 +345,6 @@ int main(int argc, char **argv)
     printf("Press ESC to quit.\n");
 
     glutKeyboardFunc(keyInput);
-    Lighting();
     init();
     glutDisplayFunc(display);
     glutTimerFunc(mmseconds,update,0);
