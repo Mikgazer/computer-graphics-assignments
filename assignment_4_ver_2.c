@@ -40,16 +40,12 @@ GLfloat red[] = {1.0,0.0,0.0,1.0};
 GLfloat blue[] = {0.0,0.0,1.0,1.0};
 GLfloat green[] = {0.0,0.1,0.0,1.0};
 
-
-// vertex coordinates
+//vertex coordinates
 GLfloat vertexCoords[4*3] = {
-    -1.0, 1.0, 0.0,
     -1.0, -1.0, 0.0,
     1.0, -1.0, 0.0,
-    1.0, -1.0, 0.0,
-    1.0, 1.0, 0.0
     -1.0, 1.0, 0.0,
-
+    1.0, 1.0, 0.0
 };
 //texture coordinates
 GLfloat textCoords[4*2] =
