@@ -225,7 +225,7 @@ void display(){
 }
 
 //Call back when the the user tries to resize the window
-//constantly refresh the window
+//constantly refreshes the window
 void reshape(GLsizei width, GLsizei height){
     //Compute aspect ratio of the new window
     if(height == 0) height ==1; //to prevent division by 0
