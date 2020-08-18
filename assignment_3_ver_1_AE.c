@@ -1,10 +1,9 @@
-
 #include <GL/glut.h>
 #define NFACES 4
 #define NVERTICES 24
 
 GLfloat vertexArray[NFACES*NVERTICES][3]={
-	
+
 	//FIRST FACE
 	//1
 	{0.5,1.0,1.0},
@@ -38,7 +37,7 @@ GLfloat vertexArray[NFACES*NVERTICES][3]={
 	{-1.0,-1.0,1.0},
 	{1.0,-1.0,1.0},
 	{1.0,-0.5,1.0},
-	
+
 	//SECOND FACE
 	//1
 	{1.0,1.0,-0.5},
@@ -72,7 +71,7 @@ GLfloat vertexArray[NFACES*NVERTICES][3]={
 	{1.0,-0.5,-1.0},
 	{1.0,-0.5,1.0},
 	{1.0,-1.0,1.0},
-	
+
 	//THIRD FACE
 	//1
 	{-1.0,1.0,-0.5},
@@ -106,7 +105,7 @@ GLfloat vertexArray[NFACES*NVERTICES][3]={
 	{-1.0,-0.5,-1.0},
 	{-1.0,-0.5,1.0},
 	{-1.0,-1.0,1.0},
-	
+
 	//FOURTH FACE
 	//1
 	{0.5,1.0,-1.0},
@@ -139,8 +138,8 @@ GLfloat vertexArray[NFACES*NVERTICES][3]={
 	//8
 	{-1.0,-1.0,-1.0},
 	{1.0,-1.0,-1.0},
-	{1.0,-0.5,-1.0},	
-};		
+	{1.0,-0.5,-1.0},
+};
 
 GLfloat colorArray[NFACES*NVERTICES*4][3]={
     {1.0, 0.0, 0.0},
@@ -192,10 +191,6 @@ GLfloat colorArray[NFACES*NVERTICES*4][3]={
     {0.0, 0.0, 1.0},
     {0.0, 0.0, 1.0},
     {0.0, 0.0, 1.0},
-    {0.0, 0.0, 1.0},
-    {0.0, 0.0, 1.0},
-    {0.0, 0.0, 1.0},
-    {0.0, 0.0, 1.0},
     //////////////
     {0.0, 1.0, 0.0},
     {0.0, 1.0, 0.0},
@@ -246,11 +241,10 @@ GLfloat colorArray[NFACES*NVERTICES*4][3]={
     {1.0, 0.0, 1.0},
     {1.0, 0.0, 1.0},
     {1.0, 0.0, 1.0},
-    
-    
+
 };
 
-/* 
+/*
 glDraw Arrays(GL enum mode, GLint first, GLsizei count);
 mode = ...
 first = Specifies the starting index in the enabled arrays.
@@ -269,7 +263,7 @@ void display(void){
 	glTranslatef(0.0,-0.4,0.0);
 	glRotatef(30.0,0.0,1.0,0.0);
 	glRotatef(15.0,1.0,0.0,0.0);
-	
+
 	for(indFace=0; indFace<NFACES;indFace++){
 		glBegin(GL_TRIANGLES);
 		for(indVertex=0;indVertex<NVERTICES;indVertex++){
@@ -278,12 +272,12 @@ void display(void){
 			glVertex3fv(vertexArray[indFace*NVERTICES + indVertex]);
 		};
 		glEnd();
-		
+
 	};
-	
-	
+
+
 	glPopMatrix();
-	
+
 	//Flush graphics objects
 	glFlush();
 
@@ -292,25 +286,25 @@ void display(void){
 void init(void){
 
 	glClearColor(1.0,1.0,1.0,0.0);
-	
+
 	//Enable two vertex arrays
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
-	
+
 	//Specify number of coordinates per vertex, type, stride, and pointer
 	glVertexPointer(3, GL_FLOAT, 0, vertexArray);
 	glColorPointer(3,GL_FLOAT,0,colorArray);
-	
-	
+
+
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();	
+	glLoadIdentity();
 	glFrustum(-0.2,-0.2,-0.3,0.1,0.1,5.0);
-	
+
 	glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glDepthFunc(GL_LESS);
-	
+
 	//glEnable(GL_CULL_FACE);
 
 }
@@ -322,11 +316,12 @@ int main(int argc,char** argv){
 	glutInitWindowSize(500,500);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("Cube with a hole in each face - DrawArrays");
-	
+
 	init();
 	glutDisplayFunc(display);
 	glutMainLoop();
-	
-		
+
+
 	return 0;
 }
+
