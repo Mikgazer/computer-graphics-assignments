@@ -1,10 +1,3 @@
-//Draw a cube with a square hole in each face.
-//Carlo Lazzari 141007
-
-//Programma che include la funzione glArray Elements
-//Ho pensato a un cubo con 4 facce laterali con un buco dentro come l'unione di 8 triangoli diversi
-//-come quindi l'unione di 4 parallelepipedi/rettangoli
-//https://imgur.com/a/9QZJL5X
 
 #include <GL/glut.h>
 #define NFACES 4
