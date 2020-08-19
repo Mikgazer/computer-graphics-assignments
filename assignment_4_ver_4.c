@@ -145,159 +145,150 @@ void draw_planets(void){
 
     //SUN
     glPushMatrix();
-        glRotatef(angleSun,0.0,1.0,0.0);
-        glColor3f(0.7,0.5,0.0);
-        glTranslatef(0.0,0.0,0.0);
-        glScalef(0.2,0.2,0.2);
-        glLightfv(GL_LIGHT0,GL_POSITION,Position);
-        glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION,yellow);
-        //EMISSION = The params parameter contains four floating-point values that specify the RGBA emitted light intensity of the material.
-        glutSolidSphere(1.05,nslices,nstacks);
-        glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION,black);
-
+    glRotatef(angleSun,0.0,1.0,0.0);
+    glColor3f(0.7,0.5,0.0);
+    glTranslatef(0.0,0.0,0.0);
+    glScalef(0.2,0.2,0.2);
+    glLightfv(GL_LIGHT0,GL_POSITION,Position);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION,yellow);
+    //EMISSION = The params parameter contains four floating-point values that specify the RGBA emitted light intensity of the material.
+    glutSolidSphere(1.05,nslices,nstacks);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION,black);
     glPopMatrix();
 
     //MERCURY
     glScalef(0.2,0.2,0.2);
     glPushMatrix();
-        glRotatef(angleMercury,0.0,1.0,angle_planet_z_Orbit);
-        glTranslatef(1.5,0.0,0.0);
-        glColor3f(1.0,0.9,0.0);
-        glScalef(0.08,0.08,0.08);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mercury_shininess);
-        glutSolidSphere(1,nslices,nstacks);
-        glTranslatef(1.0,0.0,-1.0);
-        glScalef(0.01,0.01,0.01);
-        glColor3f(1.0,1.0,1.0);
-        writeStrokeString(GLUT_STROKE_ROMAN, "Mercury");
+    glRotatef(angleMercury,0.0,1.0,angle_planet_z_Orbit);
+    glTranslatef(1.5,0.0,0.0);
+    glColor3f(1.0,0.9,0.0);
+    glScalef(0.08,0.08,0.08);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mercury_shininess);
+    glutSolidSphere(1,nslices,nstacks);
+    glTranslatef(1.0,0.0,-1.0);
+    glScalef(0.01,0.01,0.01);
+    glColor3f(1.0,1.0,1.0);
+    writeStrokeString(GLUT_STROKE_ROMAN, "Mercury");
     glPopMatrix();
 
     //VENUS
     glPushMatrix();
-        glRotatef(angleVenus,0.0,1.0,angle_planet_z_Orbit);
-        glTranslatef(2.0,0.0,0.0);
-        glColor3f(0.9,0.1,0.0);
-        glScalef(0.1,0.1,0.1);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, venus_shininess);
-        glutSolidSphere(1,nslices,nstacks);
-        glTranslatef(1.0,0.0,-1.0);
-        glScalef(0.01,0.01,0.01);
-        glColor3f(1.0,1.0,1.0);
-        writeStrokeString(GLUT_STROKE_ROMAN, "Venus");
+    glRotatef(angleVenus,0.0,1.0,angle_planet_z_Orbit);
+    glTranslatef(2.0,0.0,0.0);
+    glColor3f(0.9,0.1,0.0);
+    glScalef(0.1,0.1,0.1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, venus_shininess);
+    glutSolidSphere(1,nslices,nstacks);
+    glTranslatef(1.0,0.0,-1.0);
+    glScalef(0.01,0.01,0.01);
+    glColor3f(1.0,1.0,1.0);
+    writeStrokeString(GLUT_STROKE_ROMAN, "Venus");
     glPopMatrix();
 
     //EARTH
     glPushMatrix();
-        glRotatef(angleEarth,0.0,1.0,angle_planet_z_Orbit);
-        glTranslatef(2.5,0.0,0.0);
-        glColor3f(0.0,0.1,0.7);
-        glScalef(0.23,0.23,0.23);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, earth_shininess);
-        glutSolidSphere(1,nslices,nstacks);
-        glPushMatrix();
-            //MOON
-            glRotatef(angleMoon,0.0,1.0,angle_planet_z_Orbit);
-            glTranslatef(0.0,0,1.1);
-            glColor3f(1.0,1.0,1.0);
-            glScalef(0.5,0.5,0.5);
-            glTranslatef(1.0,0.0,0.0);
-            glutSolidSphere(0.5,nslices,nstacks);
-        glPopMatrix();
-        glTranslatef(0.2,0.0,-1.0);
-        glScalef(0.005,0.005,0.005);
-        glColor3f(1.0,1.0,1.0);
-        writeStrokeString(GLUT_STROKE_ROMAN, "Earth and Moon");
+    glRotatef(angleEarth,0.0,1.0,angle_planet_z_Orbit);
+    glTranslatef(2.5,0.0,0.0);
+    glColor3f(0.0,0.1,0.7);
+    glScalef(0.23,0.23,0.23);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, earth_shininess);
+    glutSolidSphere(1,nslices,nstacks);
+    glPushMatrix();
+    //MOON
+    glRotatef(angleMoon,0.0,1.0,angle_planet_z_Orbit);
+    glTranslatef(0.0,0,1.1);
+    glColor3f(1.0,1.0,1.0);
+    glScalef(0.5,0.5,0.5);
+    glTranslatef(1.0,0.0,0.0);
+    glutSolidSphere(0.5,nslices,nstacks);
+    glPopMatrix();
+    glTranslatef(0.2,0.0,-1.0);
+    glScalef(0.005,0.005,0.005);
+    glColor3f(1.0,1.0,1.0);
+    writeStrokeString(GLUT_STROKE_ROMAN, "Earth and Moon");
     glPopMatrix();
 
     //MARS
     glPushMatrix();
-        glRotatef(angleMars,0.0,1.0,angle_planet_z_Orbit);
-        glTranslatef(-3.0,0.0,0.0);
-        glColor3f(0.35,0.05,0.01);
-        glScalef(0.17,0.17,0.17);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mars_shininess);
-        glutSolidSphere(1,nslices,nstacks);
-        glTranslatef(0.2,0.0,-1.0);
-        glScalef(0.007,0.007,0.007);
-        glColor3f(1.0,1.0,1.0);
-        writeStrokeString(GLUT_STROKE_ROMAN, "Mars");
+    glRotatef(angleMars,0.0,1.0,angle_planet_z_Orbit);
+    glTranslatef(-3.0,0.0,0.0);
+    glColor3f(0.35,0.05,0.01);
+    glScalef(0.17,0.17,0.17);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mars_shininess);
+    glutSolidSphere(1,nslices,nstacks);
+    glTranslatef(0.2,0.0,-1.0);
+    glScalef(0.007,0.007,0.007);
+    glColor3f(1.0,1.0,1.0);
+    writeStrokeString(GLUT_STROKE_ROMAN, "Mars");
     glPopMatrix();
 
     //JUPITER
     glPushMatrix();
-        glRotatef(angleJupiter,0.0,1.0,angle_planet_z_Orbit);
-        glTranslatef(-3.7,0.0,0.0);
-        glColor3f(0.46,0.33,0.25);
-        glScalef(0.5,0.5,0.5);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, jupiter_shininess);
-        glutSolidSphere(1,nslices,nstacks);
-        glTranslatef(-0.2,0.0,-1.0);
-        glScalef(0.003,0.003,0.003);
-        glColor3f(1.0,1.0,1.0);
-        writeStrokeString(GLUT_STROKE_ROMAN, "Jupiter");
+    glRotatef(angleJupiter,0.0,1.0,angle_planet_z_Orbit);
+    glTranslatef(-3.7,0.0,0.0);
+    glColor3f(0.46,0.33,0.25);
+    glScalef(0.5,0.5,0.5);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, jupiter_shininess);
+    glutSolidSphere(1,nslices,nstacks);
+    glTranslatef(-0.2,0.0,-1.0);
+    glScalef(0.003,0.003,0.003);
+    glColor3f(1.0,1.0,1.0);
+    writeStrokeString(GLUT_STROKE_ROMAN, "Jupiter");
     glPopMatrix();
 
     //SATURN
     glPushMatrix();
-        glRotatef(angleSaturn,0.0,1.0,angle_planet_z_Orbit);
-        glTranslatef(-4.4,0.0,0.0);
-        glColor3f(0.5,0.3,0.3);
-        glScalef(0.4,0.4,0.4);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, saturn_shininess);
-        glutSolidSphere(1,nslices,nstacks);
-        glTranslatef(-0.2,0.0,-1.0);
-        glScalef(0.003,0.003,0.003);
-        glColor3f(1.0,1.0,1.0);
-        writeStrokeString(GLUT_STROKE_ROMAN, "Saturn");
+    glRotatef(angleSaturn,0.0,1.0,angle_planet_z_Orbit);
+    glTranslatef(-4.4,0.0,0.0);
+    glColor3f(0.5,0.3,0.3);
+    glScalef(0.4,0.4,0.4);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, saturn_shininess);
+    glutSolidSphere(1,nslices,nstacks);
+    glTranslatef(-0.2,0.0,-1.0);
+    glScalef(0.003,0.003,0.003);
+    glColor3f(1.0,1.0,1.0);
+    writeStrokeString(GLUT_STROKE_ROMAN, "Saturn");
     glPopMatrix();
 
     //SATURN
     glPushMatrix();
-        glRotatef(angleUranus,0.0,1.0,angle_planet_z_Orbit);
-        glTranslatef(5.0,0.0,0.0);
-        glColor3f(0.0,0.5,0.9);
-        glScalef(0.23,0.23,0.23);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, uranus_shininess);
-        glutSolidSphere(1,nslices,nstacks);
-        glTranslatef(0.2,0.0,-1.0);
-        glScalef(0.006,0.006,0.006);
-        glColor3f(1.0,1.0,1.0);
-        writeStrokeString(GLUT_STROKE_ROMAN, "Uranus");
+    glRotatef(angleUranus,0.0,1.0,angle_planet_z_Orbit);
+    glTranslatef(5.0,0.0,0.0);
+    glColor3f(0.0,0.5,0.9);
+    glScalef(0.23,0.23,0.23);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, uranus_shininess);
+    glutSolidSphere(1,nslices,nstacks);
+    glTranslatef(0.2,0.0,-1.0);
+    glScalef(0.006,0.006,0.006);
+    glColor3f(1.0,1.0,1.0);
+    writeStrokeString(GLUT_STROKE_ROMAN, "Uranus");
     glPopMatrix();
 
     //NEPTUNE
     glPushMatrix();
-        glRotatef(angleNeptune,0.0,1.0,angle_planet_z_Orbit);
-        glTranslatef(-5.6,0.0,0.0);
-        glColor3f(0.0,0.0,0.9);
-        glScalef(0.2,0.2,0.2);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, neptune_shininess);
-        glutSolidSphere(1,nslices,nstacks);
-        glTranslatef(0.2,0.0,-1.0);
-        glScalef(0.005,0.005,0.005);
-        glColor3f(1.0,1.0,1.0);
-        writeStrokeString(GLUT_STROKE_ROMAN, "Neptune");
+    glRotatef(angleNeptune,0.0,1.0,angle_planet_z_Orbit);
+    glTranslatef(-5.6,0.0,0.0);
+    glColor3f(0.0,0.0,0.9);
+    glScalef(0.2,0.2,0.2);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, neptune_shininess);
+    glutSolidSphere(1,nslices,nstacks);
+    glTranslatef(0.2,0.0,-1.0);
+    glScalef(0.005,0.005,0.005);
+    glColor3f(1.0,1.0,1.0);
+    writeStrokeString(GLUT_STROKE_ROMAN, "Neptune");
     glPopMatrix();
 
     //Sonda
     glPushMatrix();
-        glRotatef(angle_s, 0.0, 1.0, angle_planet_z_Orbit);
-        glTranslatef(4.8, 0.0, 0.0);
-        glColor3f(1.0, 1.0, 1.0);
-        glScalef(0.03, 0.03, 0.03);
-        glutSolidDodecahedron();
-        glTranslatef(0.0,0.0,-3.0);
-        glScalef(0.02,0.02,0.02);
-        writeStrokeString(GLUT_STROKE_ROMAN, "Sonda");
+    glRotatef(angle_s, 0.0, 1.0, angle_planet_z_Orbit);
+    glTranslatef(4.8, 0.0, 0.0);
+    glColor3f(1.0, 1.0, 1.0);
+    glScalef(0.03, 0.03, 0.03);
+    glutSolidDodecahedron();
+    glTranslatef(0.0,0.0,-3.0);
+    glScalef(0.02,0.02,0.02);
+    writeStrokeString(GLUT_STROKE_ROMAN, "Sonda");
     glPopMatrix();
-
-    /*
-    if(1==camera){
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        gluLookAt(5.0, 2.0, -2.0, 0.0, 0.0, 0.0, 15.0, 15.0, 15.0);
-    }
-    */
 
 }
 
