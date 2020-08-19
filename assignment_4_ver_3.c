@@ -71,6 +71,7 @@ void draw_orbit()
 	for(index=0;index<8;index++)
     {
 		glPushMatrix();
+	    //Rotation of 63 degrees around the vector [1, 0 ,0]
             glRotatef(63,1.0,0.0,0.0);
             //Make the orbit larger
             glScalef(scale_vector[index],scale_vector[index],scale_vector[index]);
