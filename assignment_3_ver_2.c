@@ -6,6 +6,8 @@
 
 #define DRAW_ARRAYS
 
+GLfloat angle = 10;
+
 GLfloat vertexArray[NFACES*NVERTICES*3]={
 
 	//FIRST FACE
@@ -146,6 +148,31 @@ GLfloat vertexArray[NFACES*NVERTICES*3]={
 };
 
 GLfloat colorArray[NFACES*NVERTICES*3*4]={
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    0.0, 0.0, 0.0,
+    //////////////
     1.0, 0.0, 0.0,
     1.0, 0.0, 0.0,
     1.0, 0.0, 0.0,
@@ -196,56 +223,30 @@ GLfloat colorArray[NFACES*NVERTICES*3*4]={
     0.0, 0.0, 1.0,
     0.0, 0.0, 1.0,
     //////////////
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    0.0, 1.0, 0.0,
-    //////////////
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-    1.0, 0.0, 1.0,
-
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
+    0.5, 0.3, 0.3,
 
 };
 
@@ -261,18 +262,21 @@ void display(void){
 	//GLshort i=0;
 	GLshort indFace, indVertex;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glPushMatrix();
+	glRotatef(angle, 0.0, 1.0, 0.0);
 	glPushMatrix();
 
 	//glTranslatef(0.0,1.0,-1.5);
 	glScalef(0.4,0.4,0.4);
 	glTranslatef(0.0,-0.4,0.0);
-	glRotatef(30.0,0.0,1.0,0.0);
-	glRotatef(15.0,1.0,0.0,0.0);
+	glRotatef(30.0,1.0,0.0,0.0);
 
 	for(indFace=0; indFace<NFACES;indFace++){
-		glDrawArrays(GL_TRIANGLES,indFace*NVERTICES,24);
+	glDrawArrays(GL_TRIANGLES,indFace*NVERTICES,24);
 	};
 
+	glPopMatrix();
 	glPopMatrix();
 
 	//Flush graphics objects
@@ -292,7 +296,6 @@ void init(void){
 	glVertexPointer(3, GL_FLOAT, 0, vertexArray);
 	glColorPointer(3,GL_FLOAT,0,colorArray);
 
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glFrustum(-0.2,-0.2,-0.3,0.1,0.1,5.0);
@@ -306,6 +309,33 @@ void init(void){
 
 }
 
+void keyInput(unsigned char key, int x, int y)
+{
+    int index=0;
+    switch(key) {
+        case 27:
+            // ESC
+            exit(0);
+            break;
+
+        case '+':
+            if(angle<360)
+                angle+=0.5;
+            glutPostRedisplay();
+            break;
+
+        case '-':
+            if(angle>1)
+                angle-=0.5;
+            glutPostRedisplay();
+            break;
+
+        default:
+            // Do nothing
+            break;
+    }
+}
+
 int main(int argc,char** argv){
 
 	glutInit(&argc,argv);
@@ -313,11 +343,12 @@ int main(int argc,char** argv){
 	glutInitWindowSize(500,500);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("Cube with a hole in each face - DrawArrays");
+	printf("Press + and - to rotate the scene\n");
 
+    	glutKeyboardFunc(keyInput);
 	init();
 	glutDisplayFunc(display);
 	glutMainLoop();
-
 
 	return 0;
 }
