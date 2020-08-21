@@ -32,9 +32,6 @@ GLfloat angle_europa=0;
 GLfloat angle_io=0;
 GLfloat angle_moon=0.0;
 
-
-
-
 //z factor of glrotatef
 GLfloat angle_z=-0.5;
 GLint status = 1;
@@ -48,7 +45,6 @@ GLfloat black[]={0.0f,0.0f,0.0f,1.0f};
 GLfloat white[]={1.0f,1.0f,1.0f,1.0f};
 GLfloat blue[]={0.0f,0.0f,0.9f,1.0f};
 GLfloat yellow[]={0.7f,0.2f,0.0f,1.0f};
-
 
 //Material light properties
 GLfloat mercury_shininess[]={26};
@@ -89,7 +85,7 @@ void draw_orbit()
 	glColor3f(1.0,1.0,1.0);
 	int index=0;
 	for(index=0;index<8;index++)
-    {
+        {
 		glPushMatrix();
         #ifdef DEBUG
             //ONLY for debugging purposes
@@ -123,7 +119,7 @@ void draw_orbit()
 void initiate_lighting()
 {
     //Set light properties
-	glLightfv(GL_LIGHT0,GL_AMBIENT,Ambient);
+    glLightfv(GL_LIGHT0,GL_AMBIENT,Ambient);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,Diffuse);
     glLightfv(GL_LIGHT0,GL_SPECULAR,Specular);
     //glLightModelfv(GL_LIGHT_MODEL_AMBIENT,globalAmb);
@@ -137,9 +133,9 @@ void initiate_lighting()
 void init()
 {
 
-	glClearColor(0.01,0.01,0.01,0.0); //backgroundcolor is black-ish
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	initiate_lighting();
+    glClearColor(0.01,0.01,0.01,0.0); //backgroundcolor is black-ish
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    initiate_lighting();
     glEnable(GL_DEPTH_TEST); //Enable depth test
     glDepthFunc(GL_LESS);
     glEnable(GL_COLOR_MATERIAL);
@@ -291,7 +287,7 @@ void draw_planets(void){
             glColor3f(0.7, 0.7, 0.7);
             glScalef(1.4, 1.4, 1.4);
             glBegin(GL_POINTS);
-                for(i=0; i<720; i++){
+            for(i=0; i<720; i++){
                 glVertex2d(cos(second_angle),sin(second_angle));
                 second_angle+=sum_angle;
             }
@@ -349,24 +345,22 @@ void draw_planets(void){
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT); //glClear sets the bitplane area of the window to values previously selected by glClearColor
-
 	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
-
-    draw_planets();
-    glutSwapBuffers();
+	draw_planets();
+	glutSwapBuffers();
 }
 
 void display_update(int value){
 
-    angle_sat+=0.5;
-    angle_sun+=0.2;
-    if(angle_sun>3) {angle_sun-=3;}
+	angle_sat+=0.5;
+	angle_sun+=0.2;
+	if(angle_sun>3) {angle_sun-=3;}
 	angle_earth+=0.7;
 	angle_mercury+=2;
-    angle_moon+=2;
-    angle_ganymede+=1.3;
-    angle_titan+=1.5;
+	angle_moon+=2;
+	angle_ganymede+=1.3;
+	angle_titan+=1.5;
 	angle_venus+=0.9;
 	angle_mars+=0.5;
 	angle_jupiter+=0.3;
@@ -419,22 +413,22 @@ void keyInput(unsigned char key, int x, int y)
 int main(int argc, char **argv)
 {
 
-    GLint window_width = 1000;
-    GLint window_height = 1000;
+	GLint window_width = 1000;
+	GLint window_height = 1000;
 	glutInit(&argc,argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB  | GLUT_DEPTH);
-    glutInitWindowPosition(0,0);
-    glutInitWindowSize(window_width,window_height);
-    glutCreateWindow("Solar System");
-    printf("Press + and - to decrease/increase the speed at which the planet revolve around the sun.\n");
-    printf("Press ESC to quit.\n");
-    printf("Press 'o' to see the orbits, press 'O' to make them disappear.\n");
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB  | GLUT_DEPTH);
+	glutInitWindowPosition(0,0);
+	glutInitWindowSize(window_width,window_height);
+	glutCreateWindow("Solar System");
+	printf("Press + and - to decrease/increase the speed at which the planet revolve around the sun.\n");
+	printf("Press ESC to quit.\n");
+	printf("Press 'o' to see the orbits, press 'O' to make them disappear.\n");
 
-    glutKeyboardFunc(keyInput);
-    init();
-    glutDisplayFunc(display);
-    glutTimerFunc(mmseconds,display_update,0);
-    glutMainLoop();
+	glutKeyboardFunc(keyInput);
+	init();
+	glutDisplayFunc(display);
+	glutTimerFunc(mmseconds,display_update,0);
+	glutMainLoop();
 
     return 0;
 
