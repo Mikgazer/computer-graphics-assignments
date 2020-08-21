@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <GL/glut.h>
@@ -14,24 +13,25 @@
 #define NOT_DEBUG
 
 //Initial angles, starting point in the orbit. Changing these factors doesn't affect the program
-GLfloat angle_s=0.0;
-GLfloat angleSun=0.0;
-GLfloat angleMercury=0.0;
-GLfloat angleVenus=0.0;
-GLfloat angleEarth=0.0;
-GLfloat angleMoon=0.0;
-GLfloat angleMars=0.0;
-GLfloat angleJupiter=45.0;
-GLfloat angleSaturn=0.0;
-GLfloat angleUranus=60.0;
-GLfloat angleNeptune=60.0;
-GLfloat angle_planet_z_Orbit=-0.5;
+GLfloat angle_sat=0.0;
+GLfloat angle_sun=0.0;
+GLfloat angle_mercury=0.0;
+GLfloat angle_venus=0.0;
+GLfloat angle_earth=0.0;
+GLfloat angle_moon=0.0;
+GLfloat angle_mars=0.0;
+GLfloat angle_jupiter=45.0;
+GLfloat angle_saturn=0.0;
+GLfloat angle_uranus=60.0;
+GLfloat angle_neptune=60.0;
+
+//z factor of glrotatef
+GLfloat angle_z=-0.5;
 GLint status = 1;
 //Only for debugging purposes
 #ifdef DEBUG
 GLfloat angleOrbit=63.0;
 #endif
-
 
 //Light colours
 GLfloat black[]={0.0f,0.0f,0.0f,1.0f};
@@ -55,7 +55,8 @@ GLfloat neptune_shininess[]={15};
 //Ambient, diffuse, and specular light properties
 GLfloat Ambient[]={0.1,0.1,0.1,1.0};
 GLfloat Diffuse[]={1.0,1.0,1.0,1.0};
-GLfloat Specular[]={.50,.50,.50,.10};
+GLfloat Specular[]={.50,.50,.50,1.0};
+GLfloat globalAmb[]={0.1, 0.1, 0.1, 1.0};
 
 GLfloat Position[]={0,0,0,0.1};
 //Distance from the center * 0.2
@@ -80,47 +81,43 @@ void draw_orbit()
 	for(index=0;index<8;index++)
     {
 		glPushMatrix();
+        #ifdef DEBUG
+            //ONLY for debugging purposes
+            //Rotation of alpha degrees around the vector [1, 0 ,0]
+            glRotatef(angleOrbit, 1.0, 0.0, 0.0);
+        #endif // DEBUG
 
-            #ifdef DEBUG
-                //Rotation of alpha degrees around the vector [1, 0 ,0]
-                glRotatef(angleOrbit, 1.0, 0.0, 0.0);
-            #endif // DEBUG
+        #ifdef NOT_DEBUG
+            glRotatef(63.0, 1.0, 0.0, 0.0);
+        #endif // NOT_DEBUG
 
-            #ifdef NOT_DEBUG
-                //Why if I rotate planets around the sun with vectors [0, 1.0, -0.5] I have to use 63 degrees?
-                //Trial and error alpha value..
-                glRotatef(63.0, 1.0, 0.0, 0.0);
-            #endif // NOT_DEBUG
-
-            //Make the orbit larger
-            //Scale or translate? if I translate the center from which I draw the orbits will move too.
-            glScalef(scale_vector[index],scale_vector[index],scale_vector[index]);
-            //Begin drawing points
-            glBegin(GL_POINTS); //Treats each vertex as a single point. Vertex n defines point n. N points are drawn.
-            GLdouble angle=0.0;
-            GLint z = 0;
-            for(z=0;z<1080;z++)
-            {
-                //Circumference parametrization
-                glVertex2d(cos(angle),sin(angle));
-                //Angle increase
-                angle+=sum_angle;
-            }
-            glEnd();
+        //Make the orbit larger
+        //Scale or translate? if I translate the center from which I draw the orbits will move too.
+        glScalef(scale_vector[index],scale_vector[index],scale_vector[index]);
+        //Begin drawing points
+        glBegin(GL_POINTS); //Treats each vertex as a single point. Vertex n defines point n. N points are drawn.
+        GLdouble angle=0.0;
+        GLint z = 0;
+        for(z=0;z<1080;z++)
+        {
+            //Circumference parametrization
+            glVertex2d(cos(angle),sin(angle));
+            //Angle increase
+            angle+=sum_angle;
+        }
+        glEnd();
 		glPopMatrix();
-
 	}
 }
 
 void initiate_lighting()
 {
-
+    //Set light properties
 	glLightfv(GL_LIGHT0,GL_AMBIENT,Ambient);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,Diffuse);
     glLightfv(GL_LIGHT0,GL_SPECULAR,Specular);
-    //glLightModelf(GL_LIGHT_MODEL_AMBIENT,globalAmb);
+    //glLightModelfv(GL_LIGHT_MODEL_AMBIENT,globalAmb);
     glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER,GL_TRUE);
-
     glShadeModel((GL_SMOOTH));
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0); //GL_LIGHTi, i is 0
@@ -129,23 +126,27 @@ void initiate_lighting()
 
 void init()
 {
-    initiate_lighting();
-	glClearColor(0.01,0.01,0.01,0.0); //backgroundcolor is black
+
+	glClearColor(0.01,0.01,0.01,0.0); //backgroundcolor is black-ish
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	initiate_lighting();
+    glEnable(GL_DEPTH_TEST); //Enable depth test
+    glDepthFunc(GL_LESS);
+    glEnable(GL_COLOR_MATERIAL);
 
 }
 
 void draw_planets(void){
 
+    int i=0;
+    double angle = 0;
+    double second_angle = 0;
     if(1==status)
         draw_orbit();
 
-    glEnable(GL_DEPTH_TEST); //Enable depth test
-    glDepthFunc(GL_LESS); //Passes if the incoming depth value is less than the stored depth value.
-    glEnable(GL_COLOR_MATERIAL); //If enabled, have one or more material parameters track the current color.
-
     //SUN
     glPushMatrix();
-    glRotatef(angleSun,0.0,1.0,0.0);
+    glRotatef(angle_sun,0.0,0.0,0.0);
     glColor3f(0.7,0.5,0.0);
     glTranslatef(0.0,0.0,0.0);
     glScalef(0.2,0.2,0.2);
@@ -159,7 +160,7 @@ void draw_planets(void){
     //MERCURY
     glScalef(0.2,0.2,0.2);
     glPushMatrix();
-    glRotatef(angleMercury,0.0,1.0,angle_planet_z_Orbit);
+    glRotatef(angle_mercury,0.0,1.0,angle_z);
     glTranslatef(1.5,0.0,0.0);
     glColor3f(1.0,0.9,0.0);
     glScalef(0.08,0.08,0.08);
@@ -173,7 +174,7 @@ void draw_planets(void){
 
     //VENUS
     glPushMatrix();
-    glRotatef(angleVenus,0.0,1.0,angle_planet_z_Orbit);
+    glRotatef(angle_venus,0.0,1.0,angle_z);
     glTranslatef(2.0,0.0,0.0);
     glColor3f(0.9,0.1,0.0);
     glScalef(0.1,0.1,0.1);
@@ -187,7 +188,7 @@ void draw_planets(void){
 
     //EARTH
     glPushMatrix();
-    glRotatef(angleEarth,0.0,1.0,angle_planet_z_Orbit);
+    glRotatef(angle_earth,0.0,1.0,angle_z);
     glTranslatef(2.5,0.0,0.0);
     glColor3f(0.0,0.1,0.7);
     glScalef(0.23,0.23,0.23);
@@ -195,7 +196,7 @@ void draw_planets(void){
     glutSolidSphere(1,nslices,nstacks);
     glPushMatrix();
     //MOON
-    glRotatef(angleMoon,0.0,1.0,angle_planet_z_Orbit);
+    glRotatef(angle_moon,1.0,1.0,angle_z);
     glTranslatef(0.0,0,1.1);
     glColor3f(1.0,1.0,1.0);
     glScalef(0.5,0.5,0.5);
@@ -210,7 +211,7 @@ void draw_planets(void){
 
     //MARS
     glPushMatrix();
-    glRotatef(angleMars,0.0,1.0,angle_planet_z_Orbit);
+    glRotatef(angle_mars,0.0,1.0,angle_z);
     glTranslatef(-3.0,0.0,0.0);
     glColor3f(0.35,0.05,0.01);
     glScalef(0.17,0.17,0.17);
@@ -224,7 +225,7 @@ void draw_planets(void){
 
     //JUPITER
     glPushMatrix();
-    glRotatef(angleJupiter,0.0,1.0,angle_planet_z_Orbit);
+    glRotatef(angle_jupiter,0.0,1.0,angle_z);
     glTranslatef(-3.7,0.0,0.0);
     glColor3f(0.46,0.33,0.25);
     glScalef(0.5,0.5,0.5);
@@ -238,21 +239,48 @@ void draw_planets(void){
 
     //SATURN
     glPushMatrix();
-    glRotatef(angleSaturn,0.0,1.0,angle_planet_z_Orbit);
+    glRotatef(angle_saturn,0.0,1.0,angle_z);
     glTranslatef(-4.4,0.0,0.0);
     glColor3f(0.5,0.3,0.3);
     glScalef(0.4,0.4,0.4);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, saturn_shininess);
     glutSolidSphere(1,nslices,nstacks);
+    //First Saturn ring
+    glPushMatrix();
+    glRotatef(45.0, 1.0, 0.0, 0.0);
+    glPointSize(1.0);
+    glColor3f(0.7, 0.7, 0.7);
+    glScalef(1.2, 1.2, 1.2);
+    glBegin(GL_POINTS);
+    for(i=0;i <720; i++){
+        glVertex2d(cos(angle),sin(angle));
+        angle+=sum_angle;
+    }
+    glEnd();
+    glPopMatrix();
+    //Second saturn ring
+    glPushMatrix();
+    glRotatef(45.0, 1.0, 0.0, 0.0);
+    glPointSize(1.0);
+    glColor3f(0.7, 0.7, 0.7);
+    glScalef(1.4, 1.4, 1.4);
+    glBegin(GL_POINTS);
+        for(i=0; i<720; i++){
+        glVertex2d(cos(second_angle),sin(second_angle));
+        second_angle+=sum_angle;
+    }
+    glEnd();
+    glPopMatrix();
+    //glPointSize(2.0);
     glTranslatef(-0.2,0.0,-1.0);
     glScalef(0.003,0.003,0.003);
-    glColor3f(1.0,1.0,1.0);
+    glColor3f(0.4,0.7,0.5);
     writeStrokeString(GLUT_STROKE_ROMAN, "Saturn");
     glPopMatrix();
 
-    //SATURN
+    //URANUS
     glPushMatrix();
-    glRotatef(angleUranus,0.0,1.0,angle_planet_z_Orbit);
+    glRotatef(angle_uranus,0.0,1.0,angle_z);
     glTranslatef(5.0,0.0,0.0);
     glColor3f(0.0,0.5,0.9);
     glScalef(0.23,0.23,0.23);
@@ -266,7 +294,7 @@ void draw_planets(void){
 
     //NEPTUNE
     glPushMatrix();
-    glRotatef(angleNeptune,0.0,1.0,angle_planet_z_Orbit);
+    glRotatef(angle_neptune,0.0,1.0,angle_z);
     glTranslatef(-5.6,0.0,0.0);
     glColor3f(0.0,0.0,0.9);
     glScalef(0.2,0.2,0.2);
@@ -280,14 +308,14 @@ void draw_planets(void){
 
     //Sonda
     glPushMatrix();
-    glRotatef(angle_s, 0.0, 1.0, angle_planet_z_Orbit);
+    glRotatef(angle_sat, 0.0, 1.0, angle_z);
     glTranslatef(4.8, 0.0, 0.0);
     glColor3f(1.0, 1.0, 1.0);
     glScalef(0.03, 0.03, 0.03);
     glutSolidDodecahedron();
     glTranslatef(0.0,0.0,-3.0);
-    glScalef(0.02,0.02,0.02);
-    writeStrokeString(GLUT_STROKE_ROMAN, "Sonda");
+    glScalef(0.03,0.03,0.03);
+    writeStrokeString(GLUT_STROKE_ROMAN, "Satellite");
     glPopMatrix();
 
 }
@@ -295,25 +323,28 @@ void draw_planets(void){
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT); //glClear sets the bitplane area of the window to values previously selected by glClearColor
+
 	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+
     draw_planets();
     glutSwapBuffers();
 }
 
 void display_update(int value){
 
-    angle_s+=0.5;
-    angleSun+=0.3;
-    if(angleSun>3) {angleSun-=3;}
-	angleEarth+=0.7;
-	angleMercury+=2;
-    angleMoon+=2;
-	angleVenus+=0.9;
-	angleMars+=0.5;
-	angleJupiter+=0.3;
-	angleSaturn+=0.15;
-	angleUranus+=0.06;
-	angleNeptune+=0.03;
+    angle_sat+=0.5;
+    angle_sun+=0.2;
+    if(angle_sun>3) {angle_sun-=3;}
+	angle_earth+=0.7;
+	angle_mercury+=2;
+    angle_moon+=2;
+	angle_venus+=0.9;
+	angle_mars+=0.5;
+	angle_jupiter+=0.3;
+	angle_saturn+=0.15;
+	angle_uranus+=0.06;
+	angle_neptune+=0.03;
 
 	glutPostRedisplay();
 	glutTimerFunc(mmseconds,display_update,0);
@@ -363,7 +394,7 @@ int main(int argc, char **argv)
     GLint window_width = 1000;
     GLint window_height = 1000;
 	glutInit(&argc,argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB  | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB  | GLUT_DEPTH);
     glutInitWindowPosition(0,0);
     glutInitWindowSize(window_width,window_height);
     glutCreateWindow("Solar System");
@@ -380,3 +411,4 @@ int main(int argc, char **argv)
     return 0;
 
 }
+
