@@ -1,14 +1,14 @@
 /*
- 
+
  Grafico rudimentale con la relazione tra il numero delle linee usate e gli FPS a schermo.
  Come è logico pensare, all'aumentare delle linee il numero degli FPS diminuisce, con una relazione simil lineare.
- I miei dati sono diversi da quello del professore forse perchè(?) sto eseguendo da una vm che quindi ha a disposizione meno  
+ I miei dati sono diversi da quello del professore forse perchè(?) sto eseguendo da una vm che quindi ha a disposizione meno
  memoria(?).
  Con colori uguali il grafico assumomiglia di più ad una curva, "quasi quadratica"
  Mi sarei aspettato che usando colori diversi la differenza in FPS sarebbe stata maggiore.
- 
+
  */
- 
+
 #define SAME_COLOR
 //#define DIFFERENT_COLORS
 
@@ -18,23 +18,15 @@
 #include<math.h>
 #include<time.h>
 
-/*
-struct point {
-	float x;
-	float y;
-};
-*/
-
 void display(void)
 {
 
 
-    glClear(GL_COLOR_BUFFER_BIT);   
-	float max=10000;
-	
+    glClear(GL_COLOR_BUFFER_BIT);
+
 	glPushMatrix();
 	glTranslatef(-0.5,-0.5,0.0);
-	
+
 	//draw Axis
 	glBegin(GL_LINE_STRIP);
 	glColor3f(0.0,0.0,0.0);
@@ -44,9 +36,10 @@ void display(void)
 	glColor3f(0.0,0.0,0.0);
 	glVertex3f(1.0,0.0,0.0);
 	glEnd();
-	
+
 	#ifdef DIFFERENT_COLORS
 		glBegin(GL_LINE_STRIP);
+		glColor3f(1.0, 0.0, 0.0);
 		glScalef(2.0,2.0,2.0);
 		glPointSize(2.0);
 		glVertex3f(0.1,0.53,0.0);
@@ -61,9 +54,10 @@ void display(void)
 		glVertex3f(1.0,0.261,0.0);
 		glEnd();
 	#endif
-	
+
 	#ifdef SAME_COLOR
 		glBegin(GL_LINE_STRIP);
+		glColor3f(0.0, 0.0, 1.0);
 		glScalef(2.0,2.0,2.0);
 		glPointSize(2.0);
 		glVertex3f(0.1,0.594,0.0);
@@ -78,25 +72,25 @@ void display(void)
 		glVertex3f(1.0,0.278,0.0);
 		glEnd();
 	#endif
-	
+
 	glPopMatrix();
 	glFlush();
 }
 
 void init (void)
 {
-	
+
     // select clearing color
     glClearColor (1.0, 1.0, 1.0, 0.0);
-   
+
     /* initialize viewing values */
     //initialize model view transforms
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    
+
     //Orthographic projection
     //glOrtho(-1.0, 1.0, -1.0, 1.0, 0.5, 5.0);
-   
+
 }
 
 // Window size and mode
@@ -119,5 +113,5 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);
     glutMainLoop();
     return 0;   /* ANSI C requires main to return int. */
-    
+
 }
