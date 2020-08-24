@@ -276,7 +276,7 @@ void display(void){
         glRotatef(15.0,1.0,0.0,0.0);
 
         for(indFace=0; indFace<NFACES;indFace++){
-            glDrawElements(GL_TRIANGLES,24,GL_UNSIGNED_INT,vertexIndices);
+            glDrawElements(GL_TRIANGLES,24,GL_UNSIGNED_INT,indFace*NVERTICES * sizeof(GLuint));
         };
 	glPopMatrix();
 
@@ -324,10 +324,14 @@ void init(void){
 	glColorPointer(3, GL_FLOAT, 0, colorArray);
 
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
 	glFrustum(-0.2,-0.2,-0.3,0.1,0.1,5.0);
 
 	glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+
+	// initialize model view transforms
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glDepthFunc(GL_LESS);
