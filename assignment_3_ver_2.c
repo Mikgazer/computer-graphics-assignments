@@ -1,6 +1,7 @@
 //Draw a cube with a square hole in each face.
 
 #include <GL/glut.h>
+#include <stdio.h>
 #define NFACES 4
 #define NVERTICES 24
 
