@@ -59,8 +59,8 @@ GLdouble sum_angle=PI/360;
 /* Routine to draw a stroke character string. */
 void writeStrokeString(void *font, char *string)
 {
-   char *c;
-   for (c = string; *c != '\0'; c++) glutStrokeCharacter(font, *c);
+	char *c;
+	for (c = string; *c != '\0'; c++) glutStrokeCharacter(font, *c);
 }
 
 void draw_orbit()
@@ -95,15 +95,15 @@ void draw_orbit()
 void initiate_lighting()
 {
 
-    glLightfv(GL_LIGHT0,GL_AMBIENT,Ambient);
-    glLightfv(GL_LIGHT0,GL_DIFFUSE,Diffuse);
-    glLightfv(GL_LIGHT0,GL_SPECULAR,Specular);
-    /* glLightModelf(GL_LIGHT_MODEL_AMBIENT,globalAmb); */
-    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER,GL_TRUE);
+	glLightfv(GL_LIGHT0,GL_AMBIENT,Ambient);
+	glLightfv(GL_LIGHT0,GL_DIFFUSE,Diffuse);
+	glLightfv(GL_LIGHT0,GL_SPECULAR,Specular);
+	/* glLightModelf(GL_LIGHT_MODEL_AMBIENT,globalAmb); */
+	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER,GL_TRUE);
 
-    glShadeModel((GL_SMOOTH));
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0); /* GL_LIGHTi, i is 0 */
+	glShadeModel((GL_SMOOTH));
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0); /* GL_LIGHTi, i is 0 */
 
 }
 
@@ -285,15 +285,15 @@ void display(void)
 
 void display_update(int value){
 
-        angle_s+=0.5;
+	angle_s+=0.5;
 
-        angleSun+=0.3;
-        if(angleSun>3)
-            angleSun-=3;
+	angleSun+=0.3;
+	if(angleSun>3)
+	    angleSun-=3;
 
 	angleEarth+=0.7;
 	angleMercury+=2;
-        angleMoon+=2;
+	angleMoon+=2;
 	angleVenus+=0.9;
 	angleMars+=0.5;
 	angleJupiter+=0.3;
@@ -302,7 +302,7 @@ void display_update(int value){
 	angleNeptune+=0.03;
 
 	glutPostRedisplay();
-	glutTimerFunc(mmseconds,display_update,0);
+glutTimerFunc(mmseconds,display_update,0);
 }
 
 
@@ -340,22 +340,22 @@ void keyInput(unsigned char key, int x, int y)
 int main(int argc, char **argv)
 {
 
-    GLint window_width = 1000;
-    GLint window_height = 1000;
-    glutInit(&argc,argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB  | GLUT_DEPTH);
-    glutInitWindowPosition(0,0);
-    glutInitWindowSize(window_width,window_height);
-    glutCreateWindow("Solar System");
-    printf("Press + and - to decrease/increase the speed at which the planet revolve around the sun.\n");
-    printf("Press ESC to quit.\n");
-    printf("Press 'o' to see the orbits, press 'O' to make them disappear.\n");
+	GLint window_width = 1000;
+	GLint window_height = 1000;
+	glutInit(&argc,argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB  | GLUT_DEPTH);
+	glutInitWindowPosition(0,0);
+	glutInitWindowSize(window_width,window_height);
+	glutCreateWindow("Solar System");
+	printf("Press + and - to decrease/increase the speed at which the planet revolve around the sun.\n");
+	printf("Press ESC to quit.\n");
+	printf("Press 'o' to see the orbits, press 'O' to make them disappear.\n");
 
-    glutKeyboardFunc(keyInput);
-    init();
-    glutDisplayFunc(display);
-    glutTimerFunc(mmseconds,display_update,0);
-    glutMainLoop();
+	glutKeyboardFunc(keyInput);
+	init();
+	glutDisplayFunc(display);
+	glutTimerFunc(mmseconds,display_update,0);
+	glutMainLoop();
 
-    return 0;
+	return 0;
 }
