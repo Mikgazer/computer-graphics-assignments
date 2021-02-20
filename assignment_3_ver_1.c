@@ -1,4 +1,4 @@
-//Draw a cube with a square hole in each face.
+/* Draw a cube with a square hole in each face. */
 
 #include <GL/glut.h>
 
@@ -8,152 +8,152 @@ void display(void){
 	
 	glPushMatrix();
 
-	//glTranslatef(0.0,1.0,-1.5);
+	/* glTranslatef(0.0,1.0,-1.5); */
 	glScalef(0.4,0.4,0.4);
 	glTranslatef(0.0,-0.4,0.0);
 	glRotatef(30.0,0.0,1.0,0.0);
 	glRotatef(15.0,1.0,0.0,0.0);
 	
-	//Triangoli
+	/* Triangoli */
 	glBegin(GL_TRIANGLES);
 
 	
-	//FIRST FACE
+	/* FIRST FACE */
 	glColor3f(1.0,0.0,0.0); 
-	//1
+	/* 1 */
 	glVertex3f(0.5,1.0,1.0);
 	glVertex3f(0.5,-1.0,1.0);
 	glVertex3f(1.0,-1.0,1.0);
-	//2
+	
 	glVertex3f(1.0,-1.0,1.0);
 	glVertex3f(1.0,1.0,1.0);
 	glVertex3f(0.5,1.0,1.0);
-	//3
+	
 	glVertex3f(1.0,1.0,1.0);
 	glVertex3f(-1.0,1.0,1.0);
 	glVertex3f(-1.0,0.5,1.0);
-	//4
+	
 	glVertex3f(-1.0,0.5,1.0);
 	glVertex3f(1.0,0.5,1.0);
 	glVertex3f(1.0,1.0,1.0);
-	//5
+	
 	glVertex3f(-1.0,1.0,1.0);
 	glVertex3f(-1.0,-1.0,1.0);
 	glVertex3f(-0.5,-1.0,1.0);
-	//6
+	
 	glVertex3f(-0.5,-1.0,1.0);
 	glVertex3f(-0.5,1.0,1.0);
 	glVertex3f(-1.0,1.0,1.0);
-	//7
+	
 	glVertex3f(1.0,-0.5,1.0);
 	glVertex3f(-1.0,-0.5,1.0);
 	glVertex3f(-1.0,-1.0,1.0);
-	//8
+	/* 8 */
 	glVertex3f(-1.0,-1.0,1.0);
 	glVertex3f(1.0,-1.0,1.0);
 	glVertex3f(1.0,-0.5,1.0);
 	
-	//SECOND FACE
-	//1
+	/* SECOND FACE */
+	/* 1 */
 	glColor3f(0.0,0.3,0.8);
 	glVertex3f(1.0,1.0,-0.5);
 	glVertex3f(1.0,-1.0,-0.5);
 	glVertex3f(1.0,-1.0,-1.0);
-	//2
+	
 	glVertex3f(1.0,-1.0,-1.0);
 	glVertex3f(1.0,1.0,-1.0);
 	glVertex3f(1.0,1.0,-0.5);
-	//3
+	
 	glVertex3f(1.0,1.0,-1.0);
 	glVertex3f(1.0,1.0,1.0);
 	glVertex3f(1.0,0.5,1.0);
-	//4
+	
 	glVertex3f(1.0,0.5,1.0);
 	glVertex3f(1.0,0.5,-1.0);
 	glVertex3f(1.0,1.0,-1.0);
-	//5
+	
 	glVertex3f(1.0,1.0,1.0);
 	glVertex3f(1.0,-1.0,1.0);
 	glVertex3f(1.0,-1.0,0.5);
-	//6
+	
 	glVertex3f(1.0,-1.0,0.5);
 	glVertex3f(1.0,1.0,0.5);
 	glVertex3f(1.0,1.0,1.0);
-	//7
+	
 	glVertex3f(1.0,-1.0,1.0);
 	glVertex3f(1.0,-1.0,-1.0);
 	glVertex3f(1.0,-0.5,-1.0);
-	
+	/* 8 */
 	glVertex3f(1.0,-0.5,-1.0);
 	glVertex3f(1.0,-0.5,1.0);
 	glVertex3f(1.0,-1.0,1.0);
 	
-	//THIRD FACE
+	/* THIRD FACE */
 	glColor3f(0.5,0.5,0.5);
-	//1
+	/* 1 */
 	glVertex3f(-1.0,1.0,-0.5);
 	glVertex3f(-1.0,-1.0,-0.5);
 	glVertex3f(-1.0,-1.0,-1.0);
-	//2
+	
 	glVertex3f(-1.0,-1.0,-1.0);
 	glVertex3f(-1.0,1.0,-1.0);
 	glVertex3f(-1.0,1.0,-0.5);
-	//3
+	
 	glVertex3f(-1.0,1.0,-1.0);
 	glVertex3f(-1.0,1.0,1.0);
 	glVertex3f(-1.0,0.5,1.0);
-	//4
+	
 	glVertex3f(-1.0,0.5,1.0);
 	glVertex3f(-1.0,0.5,-1.0);
 	glVertex3f(-1.0,1.0,-1.0);
-	//5
+	
 	glVertex3f(-1.0,1.0,1.0);
 	glVertex3f(-1.0,-1.0,1.0);
 	glVertex3f(-1.0,-1.0,0.5);
-	//6
+	
 	glVertex3f(-1.0,-1.0,0.5);
 	glVertex3f(-1.0,1.0,0.5);
 	glVertex3f(-1.0,1.0,1.0);
-	//7
+	
 	glVertex3f(-1.0,-1.0,1.0);
 	glVertex3f(-1.0,-1.0,-1.0);
 	glVertex3f(-1.0,-0.5,-1.0);
-	
+	/* 8 */
 	glVertex3f(-1.0,-0.5,-1.0);
 	glVertex3f(-1.0,-0.5,1.0);
 	glVertex3f(-1.0,-1.0,1.0);
 	
-	//FOURTH FACE
+	/* FOURTH FACE */
 	glColor3f(0.5,0.4,0.3); 
-	//1
+	/* 1 */
 	glVertex3f(0.5,1.0,-1.0);
 	glVertex3f(0.5,-1.0,-1.0);
 	glVertex3f(1.0,-1.0,-1.0);
-	//2
+	
 	glVertex3f(1.0,-1.0,-1.0);
 	glVertex3f(1.0,1.0,-1.0);
 	glVertex3f(0.5,1.0,-1.0);
-	//3
+	
 	glVertex3f(1.0,1.0,-1.0);
 	glVertex3f(-1.0,1.0,-1.0);
 	glVertex3f(-1.0,0.5,-1.0);
-	//4
+	
 	glVertex3f(-1.0,0.5,-1.0);
 	glVertex3f(1.0,0.5,-1.0);
 	glVertex3f(1.0,1.0,-1.0);
-	//5
+	
 	glVertex3f(-1.0,1.0,-1.0);
 	glVertex3f(-1.0,-1.0,-1.0);
 	glVertex3f(-0.5,-1.0,-1.0);
-	//6
+	
 	glVertex3f(-0.5,-1.0,-1.0);
 	glVertex3f(-0.5,1.0,-1.0);
 	glVertex3f(-1.0,1.0,-1.0);
-	//7
+	
 	glVertex3f(1.0,-0.5,-1.0);
 	glVertex3f(-1.0,-0.5,-1.0);
 	glVertex3f(-1.0,-1.0,-1.0);
-	//
+	/* 8 */
 	glVertex3f(-1.0,-1.0,-1.0);
 	glVertex3f(1.0,-1.0,-1.0);
 	glVertex3f(1.0,-0.5,-1.0);
@@ -179,7 +179,7 @@ void init(void){
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glDepthFunc(GL_LESS);
 	
-	//glEnable(GL_CULL_FACE);
+	/* glEnable(GL_CULL_FACE); */
 
 }
 
