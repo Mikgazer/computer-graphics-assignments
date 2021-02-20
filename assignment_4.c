@@ -9,7 +9,7 @@
 #define nslices 100
 #define nstacks 100
 
-//initial angles
+/* initial angles */
 GLfloat angleSun=0.0;
 GLfloat angleMercury=0.0;
 GLfloat angleVenus=0.0;
@@ -20,9 +20,9 @@ GLfloat angleJupiter=0.0;
 GLfloat angleSaturn=0.0;
 GLfloat angleUranus=60.0;
 GLfloat angleNeptune=60.0;
-//GLfloat anglePluto=60.0;
+/* GLfloat anglePluto=60.0; */
 
-//initial scaling factor
+/* initial scaling factor */
 GLfloat sx=0.2,sy=0.2,sz=0.2;
 GLfloat black[]={0.0f,0.0f,0.0f,1.0f};
 GLfloat white[]={1.0f,1.0f,1.0f,1.0f};
@@ -30,7 +30,7 @@ GLfloat blue[]={0.0f,0.0f,0.9f,1.0f};
 GLfloat er[]={0.0f,5.0f,0.9f,1.0f};
 GLfloat yellow[]={0.7f,0.2f,0.0f,1.0f};
 
-//material light properties
+/* material light properties */
 GLfloat mercury_shininess[]={80};
 GLfloat venus_shininess[]={70};
 GLfloat earth_shininess[]={60};
@@ -40,22 +40,22 @@ GLfloat jupiter_shininess[]={30};
 GLfloat saturn_shininess[]={25};
 GLfloat uranus_shininess[]={20};
 GLfloat neptune_shininess[]={15};
-//GLfloat pluto_shininess[]={2};
+/* GLfloat pluto_shininess[]={2};
 
-//Ambient, diffuse, and specular light properties
+/* Ambient, diffuse, and specular light properties */
 GLfloat Ambient[]={0.1,0.1,0.1,1.0};
 GLfloat Diffuse[]={1.0,1.0,1.0,1.0};
 GLfloat Specular[]={.50,.50,.50,.10};
 
 GLfloat Position[]={0,0,0,0.1};
-//distance from the center * scale factor (sx,sy,sz)
+/* distance from the center * scale factor (sx,sy,sz) */
 GLfloat scale_vector[]={0.3 , 0.40, 0.50, 0.60, 0.74, 0.88, 1.00, 1.12,1.3};
-//refresh time
+/* refresh time */
 GLint mmseconds = 25;
-//drawing factor
+/* drawing factor */
 GLdouble sum_angle=PI/360;
 
-// Routine to draw a stroke character string.
+// Routine to draw a stroke character string */
 void writeStrokeString(void *font, char *string)
 {
    char *c;
@@ -68,18 +68,18 @@ void draw_orbit()
 	glColor3f(1.0,1.0,1.0);
 	int index=0;
 	for(index=0;index<8;index++)
-    {
-		glPushMatrix();
+        {
+	    glPushMatrix();
             glRotatef(63,1.0,0.0,0.0);
-            //ingrandisco la dimensione dell'orbita
+            /* ingrandisco la dimensione dell'orbita */
             glScalef(scale_vector[index],scale_vector[index],scale_vector[index]);
-            //iniziuo a disegnare, punti
+            /*  iniziuo a disegnare, punti */
             glBegin(GL_POINTS);
             double angle=0.0;
             int z = 0;
             for(z=0;z<1440;z++)
             {
-                //parametrizzazione di una circonferenza
+                /* parametrizzazione di una circonferenza */
                 glVertex2d(cos(angle),sin(angle));
                 angle+=sum_angle;
             }
@@ -92,39 +92,39 @@ void draw_orbit()
 void initiate_lighting()
 {
 
-	glLightfv(GL_LIGHT0,GL_AMBIENT,Ambient);
+    glLightfv(GL_LIGHT0,GL_AMBIENT,Ambient);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,Diffuse);
     glLightfv(GL_LIGHT0,GL_SPECULAR,Specular);
-    //glLightModelf(GL_LIGHT_MODEL_AMBIENT,globalAmb);
+    /* glLightModelf(GL_LIGHT_MODEL_AMBIENT,globalAmb); */
     glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER,GL_TRUE);
 
     glShadeModel((GL_SMOOTH));
     glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0); //GL_LIGHTi, i is 0
+    glEnable(GL_LIGHT0); /* GL_LIGHTi, i is */
 
 }
 
 void init()
 {
-    initiate_lighting();
-	glClearColor(0.01,0.01,0.01,0.0); //backgroundcolor is black
+        initiate_lighting();
+	glClearColor(0.01,0.01,0.01,0.0); /* backgroundcolor is black */
 	glPointSize(1.0);
 	glLineWidth(2.0);
 }
 
 void display(void)
 {
-	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT); //glClear sets the bitplane area of the window to values previously selected by glClearColor
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT); /* glClear sets the bitplane area of the window to values previously selected by glClearColor */
 	draw_orbit();
 
 	glLoadIdentity();
 
 	glPushMatrix();
-        glEnable(GL_DEPTH_TEST); //Enable depth test
+        glEnable(GL_DEPTH_TEST); /* Enable depth test */
         glDepthFunc(GL_LESS);
-        glEnable(GL_COLOR_MATERIAL); //If enabled, have one or more material parameters track the current color.
+        glEnable(GL_COLOR_MATERIAL); /* If enabled, have one or more material parameters track the current color. */
 
-        //SUN
+        //SUN */
         glPushMatrix();
             glRotatef(angleSun,0.0,0.0,-0.5);
             glColor3f(0.7,0.5,0.0);
@@ -132,12 +132,12 @@ void display(void)
             glScalef(sx,sy,sz);
             glLightfv(GL_LIGHT0,GL_POSITION,Position);
             glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION,yellow);
-            //EMISSION = The params parameter contains four floating-point values that specify the RGBA emitted light intensity of the material.
+            /* EMISSION = The params parameter contains four floating-point values that specify the RGBA emitted light intensity of the material. */
             glutSolidSphere(1.05,nslices,nstacks);
             glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION,black);
         glPopMatrix();
 
-        //MERCURY
+        /* MERCURY */
         glScalef(0.2,0.2,0.2);
         glPushMatrix();
             glRotatef(angleMercury,0.0,1.0,-0.5);
@@ -152,7 +152,7 @@ void display(void)
             writeStrokeString(GLUT_STROKE_ROMAN, "Mercury");
         glPopMatrix();
 
-        //VENUS
+        /* VENUS */
         glPushMatrix();
             glRotatef(angleVenus,0.0,1.0,-0.5);
             glTranslatef(2.0,0.0,0.0);
@@ -166,7 +166,7 @@ void display(void)
             writeStrokeString(GLUT_STROKE_ROMAN, "Venus");
         glPopMatrix();
 
-        //EARTH
+        /* EARTH */
         glPushMatrix();
             glRotatef(angleEarth,0.0,1.0,-0.5);
             glTranslatef(2.5,0.0,0.0);
@@ -175,7 +175,7 @@ void display(void)
             glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, earth_shininess);
             glutSolidSphere(1,nslices,nstacks);
             glPushMatrix();
-                //MOON
+                /* MOON */
                 glRotatef(angleMoon,1.0,-0.5,0.0);
                 glTranslatef(0.0,0,1.1);
                 glColor3f(1.0,1.0,1.0);
@@ -189,7 +189,7 @@ void display(void)
             writeStrokeString(GLUT_STROKE_ROMAN, "Earth");
         glPopMatrix();
 
-        //MARS
+        /* MARS */
         glPushMatrix();
             glRotatef(angleMars,0.0,1.0,-0.5);
             glTranslatef(-3.0,0.0,0.0);
@@ -203,7 +203,7 @@ void display(void)
             writeStrokeString(GLUT_STROKE_ROMAN, "Mars");
         glPopMatrix();
 
-        //JUPITER
+        /* JUPITER */
         glPushMatrix();
             glRotatef(angleJupiter,0.0,1.0,-0.5);
             glTranslatef(-3.7,0.0,0.0);
@@ -217,7 +217,7 @@ void display(void)
             writeStrokeString(GLUT_STROKE_ROMAN, "Jupiter");
         glPopMatrix();
 
-        //SATURN
+        /* SATURN */
         glPushMatrix();
             glRotatef(angleSaturn,0.0,1.0,-0.5);
             glTranslatef(-4.4,0.0,0.0);
@@ -231,7 +231,7 @@ void display(void)
             writeStrokeString(GLUT_STROKE_ROMAN, "Saturn");
         glPopMatrix();
 
-        //SATURN
+        /* SATURN */
         glPushMatrix();
             glRotatef(angleUranus,0.0,1.0,-0.5);
             glTranslatef(5.0,0.0,0.0);
@@ -245,7 +245,7 @@ void display(void)
             writeStrokeString(GLUT_STROKE_ROMAN, "Uranus");
         glPopMatrix();
 
-        //NEPTUNE
+        /* NEPTUNE */
         glPushMatrix();
             glRotatef(angleNeptune,0.0,1.0,-0.5);
             glTranslatef(-5.6,0.0,0.0);
@@ -314,7 +314,7 @@ void keyInput(unsigned char key, int x, int y)
 
     switch(key) {
         case 27:
-            // ESC
+            // ESC */
             exit(0);
             break;
         case '+':
@@ -326,7 +326,7 @@ void keyInput(unsigned char key, int x, int y)
                 mmseconds-=1;
             break;
         default:
-            //do nothing
+            /* do nothing */
             break;
     }
 
@@ -336,7 +336,7 @@ void keyInput(unsigned char key, int x, int y)
 int main(int argc, char **argv)
 {
 
-	glutInit(&argc,argv);
+    glutInit(&argc,argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowPosition(0,0);
     glutInitWindowSize(1000,1000);
