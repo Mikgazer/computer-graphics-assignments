@@ -11,138 +11,138 @@ GLfloat angle = 10;
 
 GLfloat vertexArray[NFACES*NVERTICES*3]={
 
-	//FIRST FACE
-	//1
+	/* FIRST FACE */
+	/* 1 */
 	0.5,1.0,1.0,
 	0.5,-1.0,1.0,
 	1.0,-1.0,1.0,
-	//2
+	
 	1.0,-1.0,1.0,
 	1.0,1.0,1.0,
 	0.5,1.0,1.0,
-	//3
+	
 	1.0,1.0,1.0,
 	-1.0,1.0,1.0,
 	-1.0,0.5,1.0,
-	//4
+	
 	-1.0,0.5,1.0,
 	1.0,0.5,1.0,
 	1.0,1.0,1.0,
-	//5
+	
 	-1.0,1.0,1.0,
 	-1.0,-1.0,1.0,
 	-0.5,-1.0,1.0,
-	//6
+	
 	-0.5,-1.0,1.0,
 	-0.5,1.0,1.0,
 	-1.0,1.0,1.0,
-	//7
+	
 	1.0,-0.5,1.0,
 	-1.0,-0.5,1.0,
 	-1.0,-1.0,1.0,
-	//8
+	
 	-1.0,-1.0,1.0,
 	1.0,-1.0,1.0,
 	1.0,-0.5,1.0,
 
-	//SECOND FACE
-	//1
+	/* SECOND FACE */
+	/* 1 */
 	1.0,1.0,-0.5,
 	1.0,-1.0,-0.5,
 	1.0,-1.0,-1.0,
-	//2
+	
 	1.0,-1.0,-1.0,
 	1.0,1.0,-1.0,
 	1.0,1.0,-0.5,
-	//3
+	
 	1.0,1.0,-1.0,
 	1.0,1.0,1.0,
 	1.0,0.5,1.0,
-	//4
+	
 	1.0,0.5,1.0,
 	1.0,0.5,-1.0,
 	1.0,1.0,-1.0,
-	//5
+	
 	1.0,1.0,1.0,
 	1.0,-1.0,1.0,
 	1.0,-1.0,0.5,
-	//6
+	
 	1.0,-1.0,0.5,
 	1.0,1.0,0.5,
 	1.0,1.0,1.0,
-	//7
+	
 	1.0,-1.0,1.0,
 	1.0,-1.0,-1.0,
 	1.0,-0.5,-1.0,
-	//8
+	/* 8
 	1.0,-0.5,-1.0,
 	1.0,-0.5,1.0,
 	1.0,-1.0,1.0,
 
-	//THIRD FACE
-	//1
+	/* THIRD FACE */
+	/* 1 */
 	-1.0,1.0,-0.5,
 	-1.0,-1.0,-0.5,
 	-1.0,-1.0,-1.0,
-	//2
+	
 	-1.0,-1.0,-1.0,
 	-1.0,1.0,-1.0,
 	-1.0,1.0,-0.5,
-	//3
+	
 	-1.0,1.0,-1.0,
 	-1.0,1.0,1.0,
 	-1.0,0.5,1.0,
-	//4
+	
 	-1.0,0.5,1.0,
 	-1.0,0.5,-1.0,
 	-1.0,1.0,-1.0,
-	//5
+	
 	-1.0,1.0,1.0,
 	-1.0,-1.0,1.0,
 	-1.0,-1.0,0.5,
-	//6
+	
 	-1.0,-1.0,0.5,
 	-1.0,1.0,0.5,
 	-1.0,1.0,1.0,
-	//7
+	
 	-1.0,-1.0,1.0,
 	-1.0,-1.0,-1.0,
 	-1.0,-0.5,-1.0,
-	//8
+	//8 */
 	-1.0,-0.5,-1.0,
 	-1.0,-0.5,1.0,
 	-1.0,-1.0,1.0,
 
-	//FOURTH FACE
-	//1
+	/* FOURTH FACE */
+	/* 1 */
 	0.5,1.0,-1.0,
 	0.5,-1.0,-1.0,
 	1.0,-1.0,-1.0,
-	//2
+	
 	1.0,-1.0,-1.0,
 	1.0,1.0,-1.0,
 	0.5,1.0,-1.0,
-	//3
+	
 	1.0,1.0,-1.0,
 	-1.0,1.0,-1.0,
 	-1.0,0.5,-1.0,
-	//4
+	
 	-1.0,0.5,-1.0,
 	1.0,0.5,-1.0,
 	1.0,1.0,-1.0,
-	//5
+	
 	-1.0,1.0,-1.0,
 	-1.0,-1.0,-1.0,
 	-0.5,-1.0,-1.0,
-	//6
+	
 	-0.5,-1.0,-1.0,
 	-0.5,1.0,-1.0,
 	-1.0,1.0,-1.0,
-	//7
+	
 	1.0,-0.5,-1.0,
 	-1.0,-0.5,-1.0,
 	-1.0,-1.0,-1.0,
-	//8
+	/* 8 */
 	-1.0,-1.0,-1.0,
 	1.0,-1.0,-1.0,
 	1.0,-0.5,-1.0,
@@ -260,15 +260,15 @@ count= Specifies the number of indices to be rendered.
 
 void display(void){
 
-	//GLshort i=0;
+	/* GLshort i=0; */
 	GLshort indFace, indVertex;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glPushMatrix();
 	glRotatef(angle, 0.0, 1.0, 0.0);
 	glPushMatrix();
-
-	//glTranslatef(0.0,1.0,-1.5);
+ 
+	/* glTranslatef(0.0,1.0,-1.5); */
 	glScalef(0.4,0.4,0.4);
 	glTranslatef(0.0,-0.4,0.0);
 	glRotatef(30.0,1.0,0.0,0.0);
@@ -280,7 +280,7 @@ void display(void){
 	glPopMatrix();
 	glPopMatrix();
 
-	//Flush graphics objects
+	/* Flush graphics objects */
 	glFlush();
 
 }
@@ -289,11 +289,11 @@ void init(void){
 
 	glClearColor(1.0,1.0,1.0,0.0);
 
-	//Enable two vertex arrays
+	/* Enable two vertex arrays */
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
 
-	//Specify number of coordinates per vertex, type, stride, and pointer
+	/* Specify number of coordinates per vertex, type, stride, and pointer */
 	glVertexPointer(3, GL_FLOAT, 0, vertexArray);
 	glColorPointer(3,GL_FLOAT,0,colorArray);
 
@@ -306,7 +306,7 @@ void init(void){
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glDepthFunc(GL_LESS);
 
-	//glEnable(GL_CULL_FACE);
+	/* glEnable(GL_CULL_FACE); */
 
 }
 
@@ -332,7 +332,7 @@ void keyInput(unsigned char key, int x, int y)
             break;
 
         default:
-            // Do nothing
+            /* Do nothing */
             break;
     }
 }
