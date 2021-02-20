@@ -1,4 +1,4 @@
-//Draw a cube with a square hole in each face.
+/* Draw a cube with a square hole in each face. */
 
 #include <GL/glut.h>
 #include <stdio.h>
