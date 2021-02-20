@@ -3,25 +3,25 @@
  * by means of a circular buffer
  */
 #include <GL/glut.h>
-//#include <numeric>
+//#include <numeric> */
 #include <unistd.h>
 #include <time.h>
 #include <stdio.h>
 
-// Number of elements in the circular buffer
+/* Number of elements in the circular buffer */
 #define NELS    10
 
-// Number of lines
+/* Number of lines */
 #define NLINES  1000
-
-//#define ORTHO
+ 
+/* #define ORTHO */
 #define PROSPECTIVE
 
-// circular buffer used to compute frame rate
+/* circular buffer used to compute frame rate */
 float circularBuffer[NELS];
 int firstInd = 0, nEls = 0;
 
-// function to get the number of elapsed ticks
+/* function to get the number of elapsed ticks */
 uint32_t getTick()
 {
     struct timespec ts;
@@ -32,13 +32,13 @@ uint32_t getTick()
     return theTick;
 }
 
-// Function to compute real modulus and NOT remained as % does
+/* Function to compute real modulus and NOT remained as % does */
 inline int modulo(int a, int b) {
     const int result = a % b;
     return result >= 0 ? result : result + b;
 }
 
-// Compute sum of the elements in the circular buffer
+/* Compute sum of the elements in the circular buffer */
 float sumCircularBuffer()
 {
     int ind;
@@ -53,7 +53,7 @@ float sumCircularBuffer()
     return sum;
 }
 
-// accumulate buffer and update window title
+/* accumulate buffer and update window title */
 void computeAndShowFrameRate(void)
 {
     static float lastTime = 0.0f;
@@ -62,96 +62,96 @@ void computeAndShowFrameRate(void)
     float sumFPS;
 
     float currentTime = (float)getTick() * 0.001f;
-    // Initialize lastTime to the current time
+    /* Initialize lastTime to the current time */
     if (lastTime == 0) {
         lastTime = currentTime;
     }
 
-    // increase frame count
+    /* increase frame count */
     frameCount++;
     if (currentTime - lastTime > 1.0f) {
-        // insert the current fps in the circular buffer
+        // insert the current fps in the circular buffer */
         circularBuffer[firstInd] = ((float)frameCount) / (currentTime - lastTime);
 
-        // update variable lastTime
+        /* update variable lastTime */
         lastTime = currentTime;
 
-        //circularBuffer[firstInd] = (float)frameCount;
+        /* circularBuffer[firstInd] = (float)frameCount; */
         firstInd = ((firstInd+1)%NELS);
         if (nEls < NELS) {
             nEls++;
         }
         frameCount = 0;
 
-        // sum elements in circular buffer
+        /* sum elements in circular buffer */
         sumFPS = sumCircularBuffer();
         snprintf(windowTitle, 100, "FPS = %6.2f", sumFPS/nEls);
-        // update window title
+        /* update window title */
         glutSetWindowTitle(windowTitle);
     }
 }
 
-// display function
+/* display function */
 void display(void)
 {
 
 
-	int currLineInd;
-	computeAndShowFrameRate();
- 	glClear(GL_COLOR_BUFFER_BIT);
+    int currLineInd;
+    computeAndShowFrameRate();
+    glClear(GL_COLOR_BUFFER_BIT);
  	
     glPushMatrix();
 
     for (currLineInd = 0; currLineInd<NLINES; currLineInd++) {
-        // draw line
+        // draw line */
         glBegin(GL_LINES);
-        // random color
+        // random color */
         glColor3f((float)rand()/RAND_MAX, (float)rand()/RAND_MAX, (float)rand()/RAND_MAX);
-        // random first point
+        // random first point */
         glVertex3f((float)rand()/RAND_MAX, (float)rand()/RAND_MAX, -1);
-        // random color
+        // random color */
         glColor3f((float)rand()/RAND_MAX, (float)rand()/RAND_MAX, (float)rand()/RAND_MAX);
-        // random second point
+        // random second point */
         glVertex3f((float)rand()/RAND_MAX, (float)rand()/RAND_MAX, -1);
         glEnd();
     }
 
-    // restore model view settings
+    /* restore model view settings */
     glPopMatrix();
     glFinish();
     glutPostRedisplay();
     
 }
 
-// initialization function
+/* initialization function */
 void init (void)
 {
-    // Use current time as seed for random generator
+    /* Use current time as seed for random generator */
     srand(time(0));
     
-    // select clearing color
+    /* select clearing color */
     glClearColor (0.0, 0.0, 0.0, 0.0);
     
-    //set viewport
+    /* set viewport */
     glViewport(0,0,400,400);
      
-    //initialize model view transforms
+    /* initialize model view transforms */
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
 	#ifdef ORTHO
-		//Orthographic projection
+		/* Orthographic projection */
 		glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
-		//Orthografic projection
-		//gluOrtho2D(0.0,1.0,0.0,1.0);
+		/* Orthografic projection */
+		/* gluOrtho2D(0.0,1.0,0.0,1.0); */
     #endif 
     
     #ifdef PROSPECTIVE
-    	//gluPerspective(0,1,-1.0,5.0);
+    	/* gluPerspective(0,1,-1.0,5.0); */
     	glFrustum(0.0, 1.0, 0.0, 1.0, 0.999, 1.0);
     #endif
     
-    // ... it does not hurt to check that everything went OK
+    /*  ... it does not hurt to check that everything went OK */
     if (glGetError() != 0) {
    		exit(-1);
     } 
@@ -160,16 +160,16 @@ void init (void)
 
 }
 
-// Window size and mode
+/* Window size and mode */
 int main(int argc, char** argv)
 {
 
 	
-    // pass potential input arguments to glutInit
+    /*  pass potential input arguments to glutInit */
     glutInit(&argc, argv);
 
-    // set display mode
-    // GLUT_SINGLE = single buffer window
+    /*  set display mode */
+    /*  GLUT_SINGLE = single buffer window */
     glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
     
 
@@ -177,7 +177,7 @@ int main(int argc, char** argv)
     glutInitWindowPosition (100, 100);
     glutCreateWindow ("My first window");
 
-    // Call initialization routinesx
+    /*  Call initialization routines */
     init();
     glutDisplayFunc(display);
     glutMainLoop();
