@@ -10,7 +10,7 @@
  */
 
 #define SAME_COLOR
-//#define DIFFERENT_COLORS
+/* #define DIFFERENT_COLORS */
 
 #include <stdio.h>
 #include<stdlib.h>
@@ -27,7 +27,7 @@ void display(void)
 	glPushMatrix();
 	glTranslatef(-0.5,-0.5,0.0);
 
-	//draw Axis
+	/* draw Axis */
 	glBegin(GL_LINE_STRIP);
 	glColor3f(0.0,0.0,0.0);
 	glVertex3f(0.0,1.0,0.0);
@@ -80,38 +80,38 @@ void display(void)
 void init (void)
 {
 
-    // select clearing color
+    /* select clearing color */
     glClearColor (1.0, 1.0, 1.0, 0.0);
 
     /* initialize viewing values */
-    //initialize model view transforms
+    /* initialize model view transforms */
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    //Orthographic projection
-    //glOrtho(-1.0, 1.0, -1.0, 1.0, 0.5, 5.0);
+    /* /Orthographic projection */
+    /* glOrtho(-1.0, 1.0, -1.0, 1.0, 0.5, 5.0); */
 
 }
 
-// Window size and mode
+/* Window size and mode */
 int main(int argc, char** argv)
 {
 
-    // pass potential input arguments to glutInit
+    /* pass potential input arguments to glutInit */
     glutInit(&argc, argv);
 
-    // set display mode
-    // GLUT_SINGLE = single buffer window
+    /* set display mode
+    /* GLUT_SINGLE = single buffer window */
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
     glutInitWindowSize(1000, 1000);
     glutInitWindowPosition(100, 100);
     glutCreateWindow ("My graph");
 
-    // Call initialization routines
+    /* Call initialization routines */
     init();
     glutDisplayFunc(display);
     glutMainLoop();
-    return 0;   /* ANSI C requires main to return int. */
+    return 0;   /* ANSI C requires main to return int. */ 
 
 }
