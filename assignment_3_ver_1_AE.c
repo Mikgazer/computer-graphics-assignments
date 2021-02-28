@@ -2,7 +2,7 @@
 #define NFACES 4
 #define NVERTICES 24
 
-GLfloat vertexArray[NFACES*NVERTICES][3]={
+GLfloat vertexArray[NFACES * NVERTICES][3]={
 
 	/* FIRST FACE */
 	/* 1 */
@@ -141,7 +141,7 @@ GLfloat vertexArray[NFACES*NVERTICES][3]={
 	{1.0,-0.5,-1.0},
 };
 
-GLfloat colorArray[NFACES*NVERTICES*4][3]={
+GLfloat colorArray[NFACES * NVERTICES * 4][3]={
     {1.0, 0.0, 0.0},
     {1.0, 0.0, 0.0},
     {1.0, 0.0, 0.0},
@@ -253,23 +253,23 @@ count= Specifies the number of indices to be rendered.
 
 void display(void){
 
-	/* GLshort i=0; */
+	/* GLshort i = 0; */
 	GLshort indFace, indVertex;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glPushMatrix();
 
-	/* glTranslatef(0.0,1.0,-1.5); */
-	glScalef(0.4,0.4,0.4);
-	glTranslatef(0.0,-0.4,0.0);
-	glRotatef(30.0,0.0,1.0,0.0);
-	glRotatef(15.0,1.0,0.0,0.0);
+	/* glTranslatef(0.0, 1.0, -1.5); */
+	glScalef(0.4, 0.4, 0.4);
+	glTranslatef(0.0, -0.4, 0.0);
+	glRotatef(30.0, 0.0, 1.0, 0.0);
+	glRotatef(15.0, 1.0, 0.0, 0.0);
 
-	for(indFace=0; indFace<NFACES;indFace++){
+	for(indFace = 0; indFace < NFACES; indFace++){
 		glBegin(GL_TRIANGLES);
-		for(indVertex=0;indVertex<NVERTICES;indVertex++){
+		for(indVertex = 0; indVertex < NVERTICES; indVertex++){
 			//draw Vertex and color
-			glColor3fv(colorArray[indFace*NVERTICES + indVertex]);
-			glVertex3fv(vertexArray[indFace*NVERTICES + indVertex]);
+			glColor3fv(colorArray[indFace * NVERTICES + indVertex]);
+			glVertex3fv(vertexArray[indFace * NVERTICES + indVertex]);
 		};
 		glEnd();
 
