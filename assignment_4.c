@@ -94,11 +94,11 @@ void draw_orbit()
                 glRotatef(58.0, 1.0, 0.0, 0.0);
             #endif 
 
-		/* Make the orbit larger */ */
+		/* Make the orbit larger */
 		/* Scale or translate? if I translate the center from which I draw the orbits will move too. */
 		glScalef(scale_vector[index],scale_vector[index],scale_vector[index]);
 		/* Begin drawing points */
-		glBegin(GL_POINTS); //Treats each vertex as a single point. Vertex n defines point n. N points are drawn. */
+		glBegin(GL_POINTS); 
 		GLdouble angle=0.0;
 		GLint z = 0;
 		for(z=0;z<1080;z++)
