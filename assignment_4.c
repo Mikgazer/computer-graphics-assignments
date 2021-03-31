@@ -83,16 +83,16 @@ void draw_orbit()
 	int index=0;
 	for(index=0;index<8;index++)
         {
-	    glPushMatrix();
-            #ifdef DEBUG
-            /* ONLY for debugging purposes */
-            /* Rotation of alpha degrees around the vector [1, 0 ,0] */
-            glRotatef(angleOrbit, 1.0, 0.0, 0.0);
-            #endif
+		glPushMatrix();
+		#ifdef DEBUG
+		/* ONLY for debugging purposes */
+		/* Rotation of alpha degrees around the vector [1, 0 ,0] */
+		glRotatef(angleOrbit, 1.0, 0.0, 0.0);
+		#endif
 
-            #ifdef NOT_DEBUG
-                glRotatef(58.0, 1.0, 0.0, 0.0);
-            #endif 
+		#ifdef NOT_DEBUG
+		glRotatef(58.0, 1.0, 0.0, 0.0);
+		#endif 
 
 		/* Make the orbit larger */
 		/* Scale or translate? if I translate the center from which I draw the orbits will move too. */
@@ -103,15 +103,17 @@ void draw_orbit()
 		GLint z = 0;
 		for(z=0;z<1080;z++)
 		{
-		    /* Light ellipse parametrization */
-		    glVertex2d(cos(angle), 1.05*sin(angle));
-		    /* Angle increase */
-		    angle+=sum_angle;
+	    		/* Light ellipse parametrization */
+	   		 glVertex2d(cos(angle), 1.05*sin(angle));
+	    		/* Angle increase */
+	    		angle+=sum_angle;
 		}
 		glEnd();
-			glPopMatrix();
+		
+	glPopMatrix();
 	}
 }
+
 
 void initiate_lighting()
 {
@@ -127,6 +129,7 @@ void initiate_lighting()
 
 }
 
+
 void init()
 {
 
@@ -138,6 +141,7 @@ void init()
     glEnable(GL_COLOR_MATERIAL);
 
 }
+
 
 void draw_planets(void){
 
@@ -339,6 +343,7 @@ void draw_planets(void){
 
 }
 
+
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT); /*glClear sets the bitplane area of the window to values previously selected by glClearColor */
@@ -347,6 +352,7 @@ void display(void)
 	draw_planets();
 	glutSwapBuffers();
 }
+
 
 void display_update(int value){
 
@@ -368,6 +374,7 @@ void display_update(int value){
 	glutPostRedisplay();
 	glutTimerFunc(mmseconds,display_update,0);
 }
+
 
 void keyInput(unsigned char key, int x, int y)
 {
@@ -406,6 +413,7 @@ void keyInput(unsigned char key, int x, int y)
     }
 
 }
+
 
 int main(int argc, char **argv)
 {
