@@ -1,2 +1,2 @@
 # Assignments
-Some assignments done throughout my computer graphics class, using outdated glut libraries
+Some assignments done throughout my Computer gGraphics class, using outdated GLUT libraries.
