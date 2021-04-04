@@ -143,7 +143,8 @@ void init()
 }
 
 
-void draw_planets(void){
+void draw_planets(void)
+{
 
     int i = 0;
     double angle = 0;
@@ -354,7 +355,8 @@ void display(void)
 }
 
 
-void display_update(int value){
+void display_update(int value)
+{
 
 	angle_sat+=0.5;
 	angle_sun+=0.2;
@@ -380,7 +382,6 @@ void keyInput(unsigned char key, int x, int y)
 {
     switch(key) {
         case 27:
-            /* ESC */
             exit(0);
             break;
         case '+':
@@ -408,7 +409,6 @@ void keyInput(unsigned char key, int x, int y)
         #endif
 
         default:
-            /* do nothing */
             break;
     }
 
